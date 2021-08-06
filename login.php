@@ -97,7 +97,7 @@ if(isset($new_users))
      
               <button type="submit" class="btn btn-success my-2 login-submit-btn">Login</button>
            <br><br>
-           <p>Powered by <a href="https://github.com/kaustubhk24/">EasyURLs</a></p>
+           <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
             </form>
 
 

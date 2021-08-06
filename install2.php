@@ -69,6 +69,9 @@ if(!file_exists('config.php'))
                 <input type="password" minlength="8"  class="form-control my-2" id="password" name="password" placeholder="">
               </div>
               <button type="submit" class="btn btn-success my-2 login-submit-btn">Complete Installation</button>
+          <br><br>
+          <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
+
             </form>
 
 

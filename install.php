@@ -67,6 +67,9 @@
                 <input type="text" required  class="form-control my-2" id="dbName" name="dbName" placeholder="e.g. DB_NAME">
               </div>
               <button type="submit" class="btn btn-success my-2 login-submit-btn">Next</button>
+           <br><br>
+           <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
+
             </form>
 
 
