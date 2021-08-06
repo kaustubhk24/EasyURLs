@@ -5,6 +5,8 @@ if(!file_exists('config.php'))
     header('location:install.php');
     exit();
 }
+unlink('install.php');
+unlink('install2.php');
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
