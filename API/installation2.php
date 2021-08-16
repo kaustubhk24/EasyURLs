@@ -20,7 +20,7 @@ $sql2="CREATE TABLE  IF NOT EXISTS  `urls` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
   
 $sql3="CREATE TABLE `api` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11)  NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `KEY_NAME` varchar(60) NOT NULL,
   `API_KEY` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";  

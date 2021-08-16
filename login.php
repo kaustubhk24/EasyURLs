@@ -5,14 +5,14 @@ if(!file_exists('config.php'))
     header('location:install.php');
     exit();
 }
-if(file_exists('install.php'))
-{
- unlink('install.php');
-}
-if(file_exists('install2.php'))
-{
-  unlink('install2.php');
-}
+// if(file_exists('install.php'))
+// {
+//  unlink('install.php');
+// }
+// if(file_exists('install2.php'))
+// {
+//   unlink('install2.php');
+// }
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
