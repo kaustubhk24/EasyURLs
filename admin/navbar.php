@@ -23,7 +23,7 @@
         </li>
       </ul>
       <form class="d-flex text-white">
-          Hello <?php  echo $_SESSION['username']; ?> &nbsp;<a href="../logout.php"> Logout?</a>
+          Hello <?php  echo  ucfirst($_SESSION['username']); ?> &nbsp;<a href="../logout.php"> Logout?</a>
         </form>
     </div>
   </div>

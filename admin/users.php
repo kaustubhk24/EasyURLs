@@ -119,7 +119,8 @@ $sql = "SELECT * from users";
   <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="profile-tab">
     <div class="col-12 col-lg-4 my-1 p-4 rounded form-login">
     <form method="POST"  class="login-form" action="../API/add-new-user.php">
-       
+    <input type="hidden" id="reference" name="reference" value="<?php echo $Auth_Hash;?>">
+
        <div class="form-group my-2">
          <label for="Email">Email</label>
          <input type="text"  required onBlur="checkAvailability('Email')" class="form-control my-2" id="Email" name="Email" placeholder="">
@@ -186,10 +187,14 @@ function checkAvailability(dt)
     
     if (dt=='Email')
     {
+      var email=document.getElementById('Email').value;
+      var ref=document.getElementById('reference').value;
         jQuery.ajax({
         url: "../API/user-availability.php",
-        data:'Email='+$("#Email").val(),
+        data:{Email:email,reference:ref},
         type: "POST",
+ 
+
         success:function(data){
             if(data=='Available'){
                 $("#Email-availability-status").css("color", "green");
@@ -212,10 +217,14 @@ function checkAvailability(dt)
 
         else if(dt=='Username')
         {
+          var username=document.getElementById('Username').value;
+          var ref=document.getElementById('reference').value;
             jQuery.ajax({
                 url: "../API/user-availability.php",
-                data:'Username='+$("#Username").val(),
+                data:{Username:username,reference:ref},
                 type: "POST",
+
+
                 success:function(data){
                     if(data=='Available'){
                         $("#Username-availability-status").css("color", "green");

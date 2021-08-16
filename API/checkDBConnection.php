@@ -20,6 +20,8 @@ if(!file_exists('../config.php'))
         $text=str_replace("localhost",$_POST['host'],$text);
         $text=str_replace("db_password",$_POST['password'],$text);
         $text= str_replace("db_name",$_POST['dbName'],$text);
+        $text= str_replace("sample_token",randomPassword(),$text);
+
         $file = fopen("../config.php","w"); 
         fwrite($file,$text);
         fclose($file);
@@ -36,6 +38,15 @@ else
 {
     echo 'Installation already completed';
 }
-
+function randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+@!';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 50; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
 
 ?>

@@ -99,7 +99,8 @@ $sql = "SELECT * from urls";
   <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="profile-tab">
     <div class="col-12 col-lg-4 my-1 p-4 rounded form-login">
     <form method="POST"  class="login-form" action="../API/add-new.php">
-       
+    <input type="hidden" id="reference" name="reference" value="<?php echo $Auth_Hash;?>">
+
        <div class="form-group my-2">
          <label for="long_url">Long URL</label>
          <input type="text" onblur="makeid(6);" required  class="form-control my-2" id="long_url" name="long_url" placeholder="">
@@ -171,7 +172,7 @@ function checkAvailability(dt)
     {
         jQuery.ajax({
         url: "../API/availability.php",
-        data:'long_url='+$("#long_url").val(),
+        data:{long_url:'$("#long_url").val()',reference:'$(#reference).val()'},
         type: "POST",
         success:function(data){
             if(data=='Available'){
@@ -195,9 +196,16 @@ function checkAvailability(dt)
 
         else if(dt=='short_url')
         {
+          var short_url=document.getElementById('short_url').value;
+      var ref=document.getElementById('reference').value;
+        
+ 
+
             jQuery.ajax({
+
+  
                 url: "../API/availability.php",
-                data:'short_url='+$("#short_url").val(),
+                data:{short_url:short_url,reference:ref},  
                 type: "POST",
                 success:function(data){
                     if(data=='Available'){

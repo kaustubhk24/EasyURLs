@@ -2,8 +2,10 @@
 
 require_once('../config.php');
 
-if(isset($_POST['username']) && isset($_POST['password']))
+if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['reference']))
 {
+  if(password_verify($Auth_Token,$_POST['reference']))
+  {
     $username = mysqli_real_escape_string($conn , $_POST['username']);
     $password = mysqli_real_escape_string($conn , $_POST['password']);
 
@@ -44,6 +46,13 @@ if(isset($_POST['username']) && isset($_POST['password']))
         exit();
       }
     }
+
+  }
+  else
+  {
+    echo '401 UnAuthorized';
+  }
+    
 }
 else{
   $conn->close();

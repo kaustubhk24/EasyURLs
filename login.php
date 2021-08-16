@@ -5,14 +5,14 @@ if(!file_exists('config.php'))
     header('location:install.php');
     exit();
 }
-// if(file_exists('install.php'))
-// {
-//  unlink('install.php');
-// }
-// if(file_exists('install2.php'))
-// {
-//   unlink('install2.php');
-// }
+if(file_exists('install.php'))
+{
+ unlink('install.php');
+}
+if(file_exists('install2.php'))
+{
+  unlink('install2.php');
+}
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
@@ -74,7 +74,7 @@ if(isset($_SESSION['username']))
           
           ?>
             <form method="POST" class="login-form" action="API/login.php">
-       
+              <input type="hidden" name="reference" value="<?php echo $Auth_Hash;?>">
               <div class="form-group my-2">
                 <label for="username">Email or Username</label>
                 <input type="text" required  class="form-control my-2" id="username" name="username" placeholder="">

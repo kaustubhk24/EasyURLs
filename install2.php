@@ -56,7 +56,9 @@ if(!file_exists('config.php'))
           <p>Let's setup your account</p>
 
             <form method="POST" class="login-form" action="API/installation2.php">
-              <div class="form-group my-2">
+            <input type="hidden" name="reference" value="<?php echo $Auth_Hash;?>">
+
+            <div class="form-group my-2">
                 <label for="username">Username</label>
                 <input type="text" required class="form-control my-2" id="username" name="username" aria-describedby="emailHelp" >
               </div>

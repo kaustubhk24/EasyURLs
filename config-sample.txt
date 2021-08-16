@@ -6,6 +6,9 @@ $username = "root";
 $password = "db_password";
 $DB_Name ='db_name';
 
+$Auth_Token='sample_token';
+$Auth_Hash=password_hash($Auth_Token,PASSWORD_DEFAULT);
+
 // Create connection
 $conn = new mysqli($server_IP, $username, $password,$DB_Name);
 
