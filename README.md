@@ -2,7 +2,7 @@
 
 _We're Live_
 
-![ViewCount](https://views.whatilearened.today/views/github/kaustubhk24/EasyURLs.svg) [![GitHub issues](https://img.shields.io/github/issues/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/issues)  [![GitHub forks](https://img.shields.io/github/forks/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/network) [![GitHub stars](https://img.shields.io/github/stars/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/stargazers) [![GitHub license](https://img.shields.io/github/license/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/blob/master/License) 
+![ViewCount](https://views.whatilearened.today/views/github/kaustubhk24/EasyURLs.svg) [![GitHub issues](https://img.shields.io/github/issues/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/issues)  [![GitHub forks](https://img.shields.io/github/forks/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/network) [![GitHub stars](https://img.shields.io/github/stars/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/stargazers) [![GitHub license](https://img.shields.io/github/license/kaustubhk24/EasyURLs)](https://github.com/kaustubhk24/EasyURLs/blob/main/License) 
 
 
 *   [Installation](https://www.kaustubh.codes/blog/how-to-use-easyurls/#installation)
