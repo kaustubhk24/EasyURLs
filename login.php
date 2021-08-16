@@ -5,8 +5,14 @@ if(!file_exists('config.php'))
     header('location:install.php');
     exit();
 }
-unlink('install.php');
-unlink('install2.php');
+// if(file_exists('install.php'))
+// {
+//  unlink('install.php');
+// }
+// if(file_exists('install2.php'))
+// {
+//   unlink('install2.php');
+// }
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
@@ -14,25 +20,6 @@ if(isset($_SESSION['username']))
     header('location:./admin/index.php');
     exit();
 }
-
-
-if(isset($new_users))
-{
-     $q="DELETE FROM users";
-
-    $res=mysqli_query($conn,$q) or die(mysqli_error($conn));
-
-    foreach($new_users as $username => $password) {
-      $hash_password=password_hash($password,PASSWORD_DEFAULT);
-      $insert_query = "INSERT INTO users (USERNAME,PASSWORD) VALUES ('$username' , '$hash_password')";
-       $insert_query_result = mysqli_query($conn , $insert_query) or die(mysqli_error($conn));
-    }
-
-        
-        
-}
-
-
 
 
 ?>
@@ -46,7 +33,7 @@ if(isset($new_users))
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <title>Install App</title>
+  <title>Login EasyURLs</title>
   <style>
     body {
       background-color: #e5f1f1;

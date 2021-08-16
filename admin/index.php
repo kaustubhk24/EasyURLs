@@ -279,7 +279,6 @@ function fnExcelReport()
     return (sa);
 }
 </script>
- </script>
  
   </body>
 </html>
