@@ -19,9 +19,15 @@ $sql2="CREATE TABLE  IF NOT EXISTS  `urls` (
     `COUNT` varchar(5) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
   
+$sql3="CREATE TABLE `api` (
+  `ID` int(11) NOT NULL,
+  `KEY_NAME` varchar(60) NOT NULL,
+  `API_KEY` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";  
 $r=mysqli_query($conn,$sql) or die("Fail");
 $r2=mysqli_query($conn,$sql2) or die("Fail");
-if($r&&$r2)
+$r3=mysqli_query($conn,$sql3) or die("Fail");
+if($r&&$r2&& $r3)
 {
     $hash_password=password_hash($_POST['password'],PASSWORD_DEFAULT);
     $username=$_POST['username'];

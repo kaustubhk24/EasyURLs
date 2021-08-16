@@ -19,7 +19,7 @@
           <a class="nav-link <?php if(isset($api)){echo "active";}?>" href="api.php">API </a>
         </li> 
         <li class="nav-item">
-          <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">About EasyURLs</a>
+          <a class="nav-link" target="_blank" href="https://www.kaustubh.codes/blog/how-to-use-easyurls/" tabindex="-1" aria-disabled="true">About EasyURLs</a>
         </li>
       </ul>
       <form class="d-flex text-white">

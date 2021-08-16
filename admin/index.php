@@ -88,7 +88,6 @@ $sql = "SELECT * from urls";
         echo "<td><a class='btn btn-danger' href=javascript:AlertIt('index.php?delete".$row['ID']."');>Delete</a></td> </tr>";
     }
     
-    
     ?>
      
    
