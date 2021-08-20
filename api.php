@@ -47,7 +47,7 @@ else if((isset($_GET['TYPE']) && isset($_GET['API_KEY']) && isset($_GET['LONG_UR
             }
             echo json_encode($users);
         
-            $conn->close();
+            
         }
         else
         {
@@ -82,7 +82,7 @@ else if((isset($_GET['TYPE']) && isset($_GET['API_KEY']) && isset($_GET['LONG_UR
             }
             echo json_encode($users);
         
-            $conn->close();
+            
             
         }
         else
@@ -119,7 +119,7 @@ else if((isset($_GET['TYPE']) && isset($_GET['API_KEY']) && isset($_GET['EMAIL']
             }
             echo json_encode($users);
         
-            $conn->close();
+            
             
         }
         else
@@ -186,6 +186,9 @@ else
 {
     echo 'Invalid Arguments';
 }
+
+
+$conn->close();
 function valid($key,$conn)
 {
     $key = mysqli_real_escape_string($conn , $key);
@@ -224,7 +227,7 @@ function VIEW($conn,$user_id)
     }
     echo json_encode($users);
 
-    $conn->close();
+    
 }
 function VIEW_LINK($conn,$link)
 {
@@ -237,7 +240,7 @@ function VIEW_LINK($conn,$link)
     }
     echo json_encode($users);
 
-    $conn->close();
+    
 }
 function users($conn)
 {
@@ -251,7 +254,7 @@ function users($conn)
     }
     echo json_encode($users);
 
-    $conn->close();
+    
 }
 
 function links($conn)
@@ -266,7 +269,7 @@ function links($conn)
     }
     echo json_encode($users);
 
-    $conn->close();
+    
 }
 function generateShort($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
