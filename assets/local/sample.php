@@ -87,6 +87,7 @@ $lang = array(
     "Unable to update profile, try again"=>"Unable to update profile, try again",
     "Success! User updated"=>"Success! User updated",
     "Passwords do not match"=>"Passwords do not match",
-    "Manage Profile"=>"Manage Profile"
+    "Manage Profile"=>"Manage Profile",
+    "Hello"=>"Hello "
 );
 ?>

@@ -27,14 +27,14 @@ if(!isset($_COOKIE["lang"])) {
     }
   }
 
-// if(file_exists('install.php'))
-// {
-//  unlink('install.php');
-// }
-// if(file_exists('install2.php'))
-// {
-//   unlink('install2.php');
-// }
+if(file_exists('install.php'))
+{
+ unlink('install.php');
+}
+if(file_exists('install2.php'))
+{
+  unlink('install2.php');
+}
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
@@ -108,7 +108,8 @@ if(isset($_SESSION['username']))
      
               <button type="submit" class="btn btn-success my-2 login-submit-btn"><?php echo $lang["Login"];?></button>
            <br><br>
-           <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
+           <?php include('assets/local/index.php');?>
+           <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a> | <?php echo $lang_widget;?></p>
             </form>
 
 
