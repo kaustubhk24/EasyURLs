@@ -31,7 +31,10 @@ _We're Live_
     *   [Managing Links](https://www.kaustubh.codes/blog/how-to-use-easyurls/#managing-links)
     *   [Managing Users](https://www.kaustubh.codes/blog/how-to-use-easyurls/#managing-users-1)
     *   [Common Errors](https://www.kaustubh.codes/blog/how-to-use-easyurls/#common-errors)
-
+*   [Contribute](https://www.kaustubh.codes/blog/how-to-use-easyurls/#contribute)
+    *   [Core files](https://www.kaustubh.codes/blog/how-to-use-easyurls/#core-files)
+    *   [Translations](https://www.kaustubh.codes/blog/how-to-use-easyurls/#translations)
+    *   [Sponsor](https://www.kaustubh.codes/blog/how-to-use-easyurls/#sponsor)
 
 ## Issues 
 * See Known [Issues here](https://github.com/kaustubhk24/EasyURLs/issues)
