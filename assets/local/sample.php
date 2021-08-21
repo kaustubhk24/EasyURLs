@@ -88,6 +88,7 @@ $lang = array(
     "Success! User updated"=>"Success! User updated",
     "Passwords do not match"=>"Passwords do not match",
     "Manage Profile"=>"Manage Profile",
-    "Hello"=>"Hello "
+    "Hello"=>"Hello ",
+    "Close"=>"Close"
 );
 ?>

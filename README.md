@@ -32,9 +32,6 @@ _We're Live_
     *   [Managing Users](https://www.kaustubh.codes/blog/how-to-use-easyurls/#managing-users-1)
     *   [Common Errors](https://www.kaustubh.codes/blog/how-to-use-easyurls/#common-errors)
 
-## Future Enhancements
-* Support other operations with API
-* Multi-language support.
 
 ## Issues 
 * See Known [Issues here](https://github.com/kaustubhk24/EasyURLs/issues)
