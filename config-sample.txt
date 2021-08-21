@@ -1,5 +1,6 @@
 <?PHP
 
+
 // Database Connection
 $server_IP = "localhost";
 $username = "root";
@@ -14,7 +15,7 @@ $conn = new mysqli($server_IP, $username, $password,$DB_Name);
 
 // Checking connection
 if ($conn->connect_error) {
-    echo "<div class='alert alert-danger' role='alert'>Something went wrong and we're unable to connect Database</div>";
-    die("Can not connect ");
+    echo "<div class='alert alert-danger' role='alert'>".$lang["Something_went_wrong_and_we_are_unable_to_connect_Database"]."</div>";
+    die($lang['Can not connect']);
   }
 ?>

@@ -5,14 +5,36 @@ if(!file_exists('config.php'))
     header('location:install.php');
     exit();
 }
-if(file_exists('install.php'))
+if(isset($_GET['lang']))
 {
- unlink('install.php');
+    require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+    
 }
-if(file_exists('install2.php'))
-{
-  unlink('install2.php');
-}
+
+if(!isset($_COOKIE["lang"])) {
+  require_once ('assets/local/en.php');
+  } else {
+    if(!file_exists('assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('assets/local/en.php');
+    }
+    else
+    {
+      require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
+// if(file_exists('install.php'))
+// {
+//  unlink('install.php');
+// }
+// if(file_exists('install2.php'))
+// {
+//   unlink('install2.php');
+// }
 require_once('config.php');
 session_start();
 if(isset($_SESSION['username']))
@@ -33,7 +55,7 @@ if(isset($_SESSION['username']))
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <title>Login EasyURLs</title>
+  <title><?php echo $lang["Login EasyURLs"];?></title>
   <style>
     body {
       background-color: #e5f1f1;
@@ -64,7 +86,7 @@ if(isset($_SESSION['username']))
         </div>
         <div class="col-12 col-lg-4 my-5 p-4 rounded form-login">
           <br>
-          <h4 class=""> Login</span></h4>
+          <h4 class=""><?php echo $lang["Login"];?> </span></h4>
           <div>
           <?PHP
           if(isset($_GET['type']) && isset($_GET['message']))
@@ -76,15 +98,15 @@ if(isset($_SESSION['username']))
             <form method="POST" class="login-form" action="API/login.php">
               <input type="hidden" name="reference" value="<?php echo $Auth_Hash;?>">
               <div class="form-group my-2">
-                <label for="username">Email or Username</label>
+                <label for="username"><?php echo $lang["Email or Username"];?></label>
                 <input type="text" required  class="form-control my-2" id="username" name="username" placeholder="">
               </div>
               <div class="form-group my-2">
-                <label for="password"> Password</label>
+                <label for="password"><?php echo $lang["Password"];?> </label>
                 <input type="password"   class="form-control my-2" id="password" name="password" placeholder="">
               </div>
      
-              <button type="submit" class="btn btn-success my-2 login-submit-btn">Login</button>
+              <button type="submit" class="btn btn-success my-2 login-submit-btn"><?php echo $lang["Login"];?></button>
            <br><br>
            <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
             </form>

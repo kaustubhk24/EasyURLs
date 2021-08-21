@@ -1,4 +1,23 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 
 require_once('../config.php');
 
@@ -18,7 +37,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['refer
 
     //if no email found
     if($total===0){
-      $error_1 = "Invalid Login, Try again";
+      $error_1 = $lang["Invalid Login, Try again"];
       header("location:../login.php?type=danger&message=".$error_1);
        exit();
     }
@@ -41,7 +60,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['refer
       else
       {
         $conn->close();
-        $error_1 = "Invalid Login, Try again";
+        $error_1 = $lang["Invalid Login, Try again"];
         header("location:../login.php?type=danger&message=".$error_1);
         exit();
       }
@@ -50,7 +69,7 @@ if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['refer
   }
   else
   {
-    echo '401 UnAuthorized';
+    echo $lang["401 UnAuthorized"];
   }
     
 }

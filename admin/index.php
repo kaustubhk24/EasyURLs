@@ -1,4 +1,24 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
 session_start();
 if(!isset($_SESSION['username']))
 {
@@ -18,7 +38,7 @@ if(isset($_GET['delete']))
   $id = $_GET['delete'];
   $up = "delete from urls WHERE ID=".$id;
   $up = mysqli_query($conn,$up);
-  $error_1 = "Success! Link deleted";
+  $error_1 = $lang["Success! Link deleted"];
   header("location: index.php?type=success&message=".$error_1);
   exit();
 }
@@ -36,7 +56,7 @@ $sql = "SELECT * from urls";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Manage Links</title>
+    <title><?php echo $lang["Manage Links"];?></title>
     <style>
       <?PHP include('style.css'); ?>
     </style>
@@ -68,11 +88,11 @@ $sql = "SELECT * from urls";
   <table id="myTable" class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Short URL</th>
-      <th scope="col">Long URL</th>
-      <th scope="col">Click Count</th>
-      <th scope="col">Delete </th>
+      <th scope="col"><?php echo $lang["ID"];?></th>
+      <th scope="col"><?php echo $lang["Short URL"];?></th>
+      <th scope="col"><?php echo $lang["Long URL"];?></th>
+      <th scope="col"><?php echo $lang["Click Count"];?></th>
+      <th scope="col"><?php echo $lang["Delete"];?> </th>
     </tr>
   </thead>
   <tbody>
@@ -85,7 +105,7 @@ $sql = "SELECT * from urls";
         echo "<td><a target=_blank href=".$base_url.$row['SHORT_URL'].">".$row['SHORT_URL']."</a></td>";
         echo "<td><a target=_blank href=".$row['LONG_URL'].">".$row['LONG_URL']."</a></td>";
         echo "<td>".$row['COUNT']."</td>";
-        echo "<td><a class='btn btn-danger' href=javascript:AlertIt('index.php?delete".$row['ID']."');>Delete</a></td> </tr>";
+        echo "<td><a class='btn btn-danger' href=javascript:AlertIt('index.php?delete".$row['ID']."');>".$lang["Delete"]."</a></td> </tr>";
     }
     
     ?>
@@ -101,19 +121,19 @@ $sql = "SELECT * from urls";
     <input type="hidden" id="reference" name="reference" value="<?php echo $Auth_Hash;?>">
 
        <div class="form-group my-2">
-         <label for="long_url">Long URL</label>
+         <label for="long_url"><?php echo $lang["Long URL"];?></label>
          <input type="text" onblur="makeid(6);" required  class="form-control my-2" id="long_url" name="long_url" placeholder="">
          <span id="long_url-availability-status"></span> 
 
         </div>
        <div class="form-group my-2">
-         <label for="short_url"> Short URL</label>
+         <label for="short_url"> <?php echo $lang["Short URL"];?></label>
          <input type="text" required onBlur="checkAvailability('short_url')"   class="form-control my-2" id="short_url" name="short_url" placeholder="">
          <span id="short_url-availability-status"></span> 
 
         </div>
 
-       <button disabled type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn">Add</button>
+       <button disabled type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn"> <?php echo $lang["Add"];?></button>
     <br><br>
      </form>
 
@@ -176,14 +196,14 @@ function checkAvailability(dt)
         success:function(data){
             if(data=='Available'){
                 $("#long_url-availability-status").css("color", "green");
-                $("#long_url-availability-status").html("Long URL "+data);
+                $("#long_url-availability-status").html("<?php echo $lang["Long URL"];?> "+data);
                 flag_username=true;
                 enable(flag_mobile,flag_email,flag_username);
             }
             else
             {
                 $("#user-availability-status").css("color", "red");
-                $("#user-availability-status").html("Long URL "+data);
+                $("#user-availability-status").html("<?php echo $lang["Long URL"];?> "+data);
                 flag_username=false;
                 enable(flag_mobile,flag_email,flag_username);
             }
@@ -209,14 +229,14 @@ function checkAvailability(dt)
                 success:function(data){
                     if(data=='Available'){
                         $("#short_url-availability-status").css("color", "green");
-                        $("#short_url-availability-status").html("Short URL  "+data);
+                        $("#short_url-availability-status").html("<?php echo $lang["Short URL"];?>  "+data);
                         flag_email=true;
                         enable(flag_email);
                     }
                     else
                     {
                         $("#short_url-availability-status").css("color", "red");
-                        $("#short_url-availability-status").html("Short URL "+data);
+                        $("#short_url-availability-status").html("<?php echo $lang["Short URL"];?> "+data);
                         flag_email=false;
                         enable(flag_email);
                     }
@@ -246,7 +266,7 @@ function enable(flag_email)
 }
 
 function AlertIt(link) {
-var answer = confirm ("Are you sure want to delete this link? it will also delete link click counts.")
+var answer = confirm ("<?php echo $lang["Are you sure want to delete this link? it will also delete link click counts."];?>")
 if (answer)
 link=link.replace("delete","delete=");
 window.location=link;

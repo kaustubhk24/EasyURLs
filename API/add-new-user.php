@@ -1,4 +1,23 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 
 require_once('../config.php');
 
@@ -13,13 +32,13 @@ if(isset($_POST['Username']) && isset($_POST['Email']) && isset($_POST['password
          $insert_query_result = mysqli_query($conn , $insert_query) or die(mysqli_error($conn));
   
   
-         $error_1 = "Success! User added";
+         $error_1 = $lang["Success! User added"];
          header("location:../admin/users.php?type=success&message=".$error_1);
          exit();
 
     }
     else{
-      echo '401 UnAuthorized';
+      echo $lang["401 UnAuthorized"];
   }
   
 
@@ -33,7 +52,7 @@ if(isset($_POST['Username']) && isset($_POST['Email']) && isset($_POST['password
 else
 {
    $conn->close();
-        $error_1 = "Unable to add user, try again later";
+        $error_1 = $lang["Unable to add user, try again later"];
         header("location:../admin/users.php?type=danger&message=".$error_1);
         exit();
 }

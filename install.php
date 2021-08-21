@@ -1,4 +1,26 @@
+<?PHP 
+if(isset($_GET['lang']))
+{
+    require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+  require_once ('assets/local/en.php');
+  } else {
+    if(!file_exists('assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('assets/local/en.php');
+    }
+    else
+    {
+      require_once ('assets/local/'.$_COOKIE["lang"].'.php');
 
+    }
+  }
+
+
+?>
 
 
 <!doctype html>
@@ -8,7 +30,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <title>Install App</title>
+  <title><?PHP echo $lang["Install App"];?></title>
   <style>
     body {
       background-color: #e5f1f1;
@@ -39,7 +61,7 @@
         </div>
         <div class="col-12 col-lg-4 my-5 p-4 rounded form-login">
           <br>
-          <h4 class=""> Installation</span></h4>
+          <h4 class=""><?PHP echo $lang["Installation"];?></span></h4>
           <div>
           <?PHP
           if(isset($_GET['type']) && isset($_GET['message']))
@@ -48,25 +70,25 @@
           }
           
           ?>
-            <div class="alert alert-info">If you face any issue while performing installation delete config.php file and try again.</div>
+            <div class="alert alert-info"><?php echo $lang["If you face any issue while performing installation delete config.php file and try again."];?></div>
             <form method="POST" class="login-form" action="API/checkDBConnection.php">
               <div class="form-group my-2">
-                <label for="host">Host</label>
-                <input type="text" required class="form-control my-2" id="host" name="host" aria-describedby="emailHelp" placeholder="e.g.localhost or IP address:3306">
+                <label for="host"><?php echo $lang["Host"];?></label>
+                <input type="text" required class="form-control my-2" id="host" name="host" aria-describedby="emailHelp" placeholder="<?php echo $lang["e.g.localhost or IP:3306"];?>">
               </div>
               <div class="form-group my-2">
-                <label for="username">Database Username</label>
-                <input type="text" required  class="form-control my-2" id="username" name="username" placeholder="e.g. Database_USER">
+                <label for="username"><?php echo $lang["Database Username"];?></label>
+                <input type="text" required  class="form-control my-2" id="username" name="username" placeholder="<?PHP echo $lang["e.g. Database_USER"];?>">
               </div>
               <div class="form-group my-2">
-                <label for="password">Database Password</label>
+                <label for="password"><?php echo $lang["Database Password"];?></label>
                 <input type="password"   class="form-control my-2" id="password" name="password" placeholder="">
               </div>
               <div class="form-group my-2">
-                <label for="dbName">Database Name</label>
-                <input type="text" required  class="form-control my-2" id="dbName" name="dbName" placeholder="e.g. DB_NAME">
+                <label for="dbName"><?php echo $lang["Database Name"]; ?></label>
+                <input type="text" required  class="form-control my-2" id="dbName" name="dbName" placeholder="<?php echo $lang["e.g. DB_NAME"]?>">
               </div>
-              <button type="submit" class="btn btn-success my-2 login-submit-btn">Next</button>
+              <button type="submit" class="btn btn-success my-2 login-submit-btn"><?php echo $lang["Next"];?></button>
            <br><br>
            <p>Powered by <a target="_blank" href="https://github.com/kaustubhk24/EasyURLs">EasyURLs</a></p>
 

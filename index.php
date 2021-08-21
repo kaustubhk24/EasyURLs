@@ -1,5 +1,25 @@
 <?PHP
 
+if(isset($_GET['lang']))
+{
+    require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+  require_once ('assets/local/en.php');
+  } else {
+    if(!file_exists('assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('assets/local/en.php');
+    }
+    else
+    {
+      require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
 if(!file_exists('config.php'))
 {
     header('location:install.php');
@@ -21,7 +41,7 @@ if(isset($_GET['id']))
 
     //if nothing found
     if($total===0){
-       echo 'Invalid Short URL';
+       echo $lang['Invalid Short URL'];
     }
 
 
@@ -39,7 +59,7 @@ if(isset($_GET['id']))
 }
 else
 {
-    echo "Invalid Short URL";
+    echo $lang['Invalid Short URL'];
 }
 
 

@@ -1,4 +1,24 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
 error_reporting(0);
 if(!file_exists('../config.php'))
 {
@@ -8,7 +28,7 @@ if(!file_exists('../config.php'))
         // Check connection
         if (!$conn) 
         {
-            $m="Invalid Database details, Please check if username and password is correct and it has access to database";
+            $m=$lang["Invalid Database details, Please check if username and password is correct and it has access to database"];
             header('location:../install.php?type=danger&message='.$m);
             exit();
           
@@ -31,12 +51,12 @@ if(!file_exists('../config.php'))
     }
     else
     {
-        echo 'Invalid Arguments';
+        echo $lang["Invalid Arguments"];
     }
 }
 else
 {
-    echo 'Installation already completed';
+    echo $lang["Installation already completed"];
 }
 function randomPassword() {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-+@!';

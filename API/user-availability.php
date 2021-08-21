@@ -1,6 +1,25 @@
 <?php 
 
 require_once('../config.php');
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 
 
 if(isset($_POST['Username']) && isset($_POST['reference']) )
@@ -14,17 +33,17 @@ if(isset($_POST['Username']) && isset($_POST['reference']) )
       
         if($find==0)
         {
-            echo 'Available';
+            echo $lang["Available"];
         }
         else
         {
-            echo 'Not Available';
+            echo $lang["Not Available"];
         }
     }
       
     else
     {
-        echo '401 UnAuthorized';
+        echo $lang["401 UnAuthorized"];
     }
         
       
@@ -46,11 +65,11 @@ else if(isset($_POST['Email'] ) && isset($_POST['reference']) )
       
         if($find==0)
         {
-            echo 'Available';
+            echo $lang["Available"];
         }
         else
         {
-            echo 'Already registered';
+            echo $lang["Already Registered"];
         }
         
       
@@ -58,7 +77,7 @@ else if(isset($_POST['Email'] ) && isset($_POST['reference']) )
     
     }
     else{
-        echo '401 UnAuthorized';
+        echo $lang["401 UnAuthorized"];
     }
     
 }
@@ -66,7 +85,7 @@ else if(isset($_POST['Email'] ) && isset($_POST['reference']) )
 
 
 else{
-    echo '401 UnAuthorized';
+    echo $lang["401 UnAuthorized"];
 }
 
   

@@ -1,4 +1,24 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
 session_start();
 if(!isset($_SESSION['username']))
 {
@@ -16,7 +36,7 @@ if(isset($_GET['delete']))
   $id = $_GET['delete'];
   $up = "delete from users WHERE USER_ID=".$id;
   $up = mysqli_query($conn,$up);
-  $error_1 = "Success! user deleted";
+  $error_1 = $lang["Success! user deleted"];
   header("location: users.php?type=success&message=".$error_1);
   exit();
 }
@@ -29,7 +49,7 @@ if(isset($_GET['reset']))
   echo $up;
   $up = mysqli_query($conn,$up);
 
-  $error_1 = "Success! New password is '".$new_pass."'";
+  $error_1 = $lang["Success! New password is "].$new_pass;
   header("location: users.php?type=success&message=".$error_1);
   exit();
 }
@@ -56,7 +76,7 @@ $sql = "SELECT * from users";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Manage Users</title>
+    <title><?php echo $lang["Manage Users"];?></title>
     <style>
       <?PHP include('style.css'); ?>
     </style>
@@ -72,10 +92,10 @@ $sql = "SELECT * from users";
           ?>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#links" type="button" role="tab" aria-controls="home" aria-selected="true">All Users</button>
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#links" type="button" role="tab" aria-controls="home" aria-selected="true"><?php echo $lang["All Users"];?></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#new" type="button" role="tab" aria-controls="profile" aria-selected="false">Add New User</button>
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#new" type="button" role="tab" aria-controls="profile" aria-selected="false"><?php echo $lang["Add New User"];?></button>
   </li>
   <iframe id="txtArea1" style="display:none"></iframe>
 
@@ -83,16 +103,16 @@ $sql = "SELECT * from users";
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="links" role="tabpanel" aria-labelledby="home-tab">
 <center>  <input class="mt-2 mb-2" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-<button type="button" id="btnExport" onclick="fnExcelReport();" class="btn btn-success">Download Excel</button>
+<button type="button" id="btnExport" onclick="fnExcelReport();" class="btn btn-success"><?php echo $lang["Download Excel"];?></button>
 </center>
   <table id="myTable" class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Username</th>
-      <th scope="col">Email</th>
-      <th scope="col"> Password</th>
-      <th scope="col">Delete </th>
+      <th scope="col"><?php echo $lang["ID"];?></th>
+      <th scope="col"><?php echo $lang["Username"];?></th>
+      <th scope="col"><?php echo $lang["Email"];?></th>
+      <th scope="col"> <?php echo $lang["Password"];?></th>
+      <th scope="col"><?php echo $lang["Delete"];?> </th>
     </tr>
   </thead>
   <tbody>
@@ -104,8 +124,8 @@ $sql = "SELECT * from users";
         echo "<tr><th scope='row'>".$row['USER_ID']."</th>";
         echo "<td>".$row['USERNAME']."</td>";
         echo "<td><a target=_blank href=mailto:".$row['EMAIL'].">".$row['EMAIL']."</a></td>";
-        echo "<td><a class='btn btn-warning' href=javascript:AlertItReset('users.php?reset".$row['USER_ID']."');>Reset</a></td> ";
-        echo "<td><a class='btn btn-danger' href=javascript:AlertIt('users.php?delete".$row['USER_ID']."');>Delete</a></td> </tr>";
+        echo "<td><a class='btn btn-warning' href=javascript:AlertItReset('users.php?reset".$row['USER_ID']."');>".$lang["Reset"]."</a></td> ";
+        echo "<td><a class='btn btn-danger' href=javascript:AlertIt('users.php?delete".$row['USER_ID']."');>".$lang["Delete"]."</a></td> </tr>";
     }
     
     
@@ -122,25 +142,25 @@ $sql = "SELECT * from users";
     <input type="hidden" id="reference" name="reference" value="<?php echo $Auth_Hash;?>">
 
        <div class="form-group my-2">
-         <label for="Email">Email</label>
+         <label for="Email"><?php echo $lang["Email"];?></label>
          <input type="text"  required onBlur="checkAvailability('Email')" class="form-control my-2" id="Email" name="Email" placeholder="">
          <span id="Email-availability-status"></span> 
 
         </div>
        <div class="form-group my-2">
-         <label for="Username"> Username</label>
+         <label for="Username"> <?php echo $lang["Username"];?></label>
          <input type="text" required onBlur="checkAvailability('Username')"   class="form-control my-2" id="Username" name="Username" placeholder="">
          <span id="Username-availability-status"></span> 
 
         </div>
         <div class="form-group my-2">
-         <label for="password"> Password</label>
+         <label for="password"> <?php echo $lang["Password"];?></label>
          <input type="password" required   class="form-control my-2" id="password" name="password" placeholder="">
          <span id="password-availability-status"></span> 
 
         </div>
 
-       <button disabled type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn">Add</button>
+       <button disabled type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn"><?php echo $lang["Add"];?></button>
     <br><br>
      </form>
 
@@ -197,14 +217,14 @@ function checkAvailability(dt)
         success:function(data){
             if(data=='Available'){
                 $("#Email-availability-status").css("color", "green");
-                $("#Email-availability-status").html("Email "+data);
+                $("#Email-availability-status").html("<?php echo $lang["Email"];?> "+data);
                 flag_email=true;
                 enable(flag_email,flag_username);
             }
             else
             {
                 $("#Email-availability-status").css("color", "red");
-                $("#Email-availability-status").html("Email "+data);
+                $("#Email-availability-status").html("<?php echo $lang["Email"];?> "+data);
                 flag_email=false;
                 enable(flag_email,flag_username);
             }
@@ -227,14 +247,14 @@ function checkAvailability(dt)
                 success:function(data){
                     if(data=='Available'){
                         $("#Username-availability-status").css("color", "green");
-                        $("#Username-availability-status").html("username  "+data);
+                        $("#Username-availability-status").html("<?php echo $lang["Username"];?>  "+data);
                         flag_username=true;
                         enable(flag_email,flag_username);
                     }
                     else
                     {
                         $("#Username-availability-status").css("color", "red");
-                        $("#Username-availability-status").html("username "+data);
+                        $("#Username-availability-status").html("<?php echo $lang["Username"];?> "+data);
                         flag_email=false;
                         enable(flag_email,flag_username);
                     }
@@ -264,14 +284,14 @@ function enable(flag_email,flag_username)
 }
 
 function AlertIt(link) {
-var answer = confirm ("Are you sure want to delete this User? ")
+var answer = confirm ("<?php echo $lang["Are you sure want to delete this User?"];?>")
 if (answer)
 link=link.replace("delete","delete=");
 
 window.location=link;
 }
 function AlertItReset(link) {
-var answer = confirm ("Are you sure want to reset this User? ")
+var answer = confirm ("<?php echo $lang["Are you sure want to reset this User?"];?>")
 if (answer)
 link=link.replace("reset","reset=");
 

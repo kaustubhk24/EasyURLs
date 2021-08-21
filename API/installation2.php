@@ -1,4 +1,23 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 
 require_once('../config.php');
 
@@ -35,13 +54,13 @@ if($r&&$r2&& $r3)
       $insert_query = "INSERT INTO users (USERNAME,EMAIL,PASSWORD) VALUES ('$username','$email' , '$hash_password')";
        $insert_query_result = mysqli_query($conn , $insert_query) or die(mysqli_error($conn));
 
-       echo "Installation has been completed successfully, Taking you to login page, please wait..."; 
+       echo $lang["Installation has been completed successfully, Taking you to login page, please wait..."]; 
        header( "refresh:5;url=../login.php" );
 
     }
 else
 {
-    echo 'Please delete config.php from root folder and retry installation';
+    echo $lang["Please delete config.php from root folder and retry installation"];
 }
 
 $conn->close();

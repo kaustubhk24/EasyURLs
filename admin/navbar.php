@@ -7,23 +7,23 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link <?php if(isset($index)){echo "active";}?>" aria-current="page" href="index.php">Manage Links</a>
+          <a class="nav-link <?php if(isset($index)){echo "active";}?>" aria-current="page" href="index.php"><?php echo $lang["Manage Links"];?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if(isset($users)){echo "active";}?>"  href="users.php">Manage Users</a>
+          <a class="nav-link <?php if(isset($users)){echo "active";}?>"  href="users.php"><?php echo $lang["Manage Users"];?></a>
         </li>    
         <li class="nav-item">
-          <a class="nav-link <?php if(isset($profile)){echo "active";}?>" href="profile.php">My Profile</a>
+          <a class="nav-link <?php if(isset($profile)){echo "active";}?>" href="profile.php"><?php echo $lang["My Profile"];?></a>
         </li> 
         <li class="nav-item">
-          <a class="nav-link <?php if(isset($api)){echo "active";}?>" href="api.php">API </a>
+          <a class="nav-link <?php if(isset($api)){echo "active";}?>" href="api.php"><?php echo $lang["API"];?> </a>
         </li> 
         <li class="nav-item">
-          <a class="nav-link" target="_blank" href="https://www.kaustubh.codes/blog/how-to-use-easyurls/" tabindex="-1" aria-disabled="true">About EasyURLs</a>
+          <a class="nav-link" target="_blank" href="https://www.kaustubh.codes/blog/how-to-use-easyurls/" tabindex="-1" aria-disabled="true"><?php echo $lang["About EasyURLs"];?></a>
         </li>
       </ul>
       <form class="d-flex text-white">
-          Hello <?php  echo  ucfirst($_SESSION['username']); ?> &nbsp;<a href="../logout.php"> Logout?</a>
+          Hello <?php  echo  ucfirst($_SESSION['username']); ?> &nbsp;<a href="../logout.php"><?php echo $lang["Logout"];?> </a>
         </form>
     </div>
   </div>

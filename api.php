@@ -1,6 +1,27 @@
 <?PHP
 
 require('config.php');
+if(isset($_GET['lang']))
+{
+    require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+    
+}
+if(!isset($_COOKIE["lang"])) {
+    require_once ('assets/local/en.php');
+  } else {
+    if(!file_exists('assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('assets/local/en.php');
+    }
+    else
+    {
+      require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
+
 if(isset($_GET['TYPE']) && isset($_GET['API_KEY']) && isset($_GET['USER_ID']) )
 {
     $type=$_GET['TYPE'];

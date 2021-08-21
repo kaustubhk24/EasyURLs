@@ -1,4 +1,23 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+     require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 
 require_once('../config.php');
 
@@ -12,13 +31,13 @@ if(isset($_POST['long_url']) && isset($_POST['short_url']) && isset($_POST['refe
              $insert_query_result = mysqli_query($conn , $insert_query) or die(mysqli_error($conn));
       
       
-             $error_1 = "Success! Link saved";
+             $error_1 = $lang["Success! Link saved"];
              header("location:../admin/index.php?type=success&message=".$error_1);
              exit();
       
      }
      else{
-          echo '401 UnAuthorized';
+          echo $lang["401 UnAuthorized"];
       }
       
     
@@ -29,7 +48,7 @@ $conn->close();
 else
 {
    $conn->close();
-        $error_1 = "Unable to add url, try again later";
+        $error_1 = $lang["Unable to add url, try again later"];
         header("location:../admin/index.php?type=danger&message=".$error_1);
         exit();
 }

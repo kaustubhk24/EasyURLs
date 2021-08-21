@@ -1,4 +1,23 @@
 <?PHP
+if(isset($_GET['lang']))
+{
+    require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+    header('Location: ' . basename(__FILE__));
+    setcookie("lang", $_GET['lang'], time() + (86400 * 30));
+}
+if(!isset($_COOKIE["lang"])) {
+  require_once ('../assets/local/en.php');
+  } else {
+    if(!file_exists('../assets/local/'.$_COOKIE["lang"].'.php'))
+    {
+      require_once ('../assets/local/en.php');
+    }
+    else
+    {
+      require_once ('../assets/local/'.$_COOKIE["lang"].'.php');
+
+    }
+  }
 session_start();
 if(!isset($_SESSION['username']))
 {
@@ -17,7 +36,7 @@ $sql = "SELECT * from users WHERE USERNAME='$username' OR EMAIL='$username'";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Manage Profile</title>
+    <title><?php echo $lang["Manage Profile"];?></title>
     <style>
       <?PHP include('style.css'); ?>
     </style>
@@ -35,37 +54,37 @@ $sql = "SELECT * from users WHERE USERNAME='$username' OR EMAIL='$username'";
    
   
    <div class="col-12 col-lg-4 my-1 p-4 rounded form-login">
-   <h4>Your Profile</h4>
-   <p>Change fields you want to edit and click on update.</p>
+   <h4><?php echo $lang["Your Profile"];?></h4>
+   <p><?php echo $lang["Change fields you want to edit and click on update."];?></p>
     <form method="POST"  class="login-form" action="../API/profile-update.php">
     <input type="hidden" id="reference" name="reference" value="<?php echo $Auth_Hash;?>">
 
     <div class="form-group my-2">
-         <label for="Email">Email</label>
+         <label for="Email"><?php echo $lang["Email"];?></label>
          <input type="text" readonly  required onBlur="checkAvailability('Email')" class="form-control my-2" id="Email" name="Email" value="<?php echo $row['EMAIL'];?>" placeholder="">
-         <p style="color:blue;" onclick="enableBtn('Email',this);">Edit</p>
+         <p style="color:blue;" onclick="enableBtn('Email',this);"><?php echo $lang["Edit"]; ?></p>
          <span id="Email-availability-status"></span> 
 
         </div>
        <div class="form-group my-2">
-         <label for="Username"> Username</label>
+         <label for="Username"><?php echo $lang["Username"];?> </label>
          <input type="text" readonly required onBlur="checkAvailability('Username')"   class="form-control my-2" id="Username"  value="<?php echo $row['USERNAME'];?>" name="Username" placeholder="">
-         <p class="text-xs-right" onclick="enableBtn('Username',this);" style="color:blue;">Edit</p>
+         <p class="text-xs-right" onclick="enableBtn('Username',this);" style="color:blue;"><?php echo $lang["Edit"]; ?></p>
          <span id="Username-availability-status"></span> 
 
         </div>
         <div class="form-group my-2">
-         <label for="password"> New Password</label>
+         <label for="password"><?php echo $lang["New Password"];?> </label>
          <input type="password" minlength="8" onkeyup="validatePassword();"   class="form-control my-2" id="password" name="password" placeholder="">
 
         </div>
         <div class="form-group my-2">
-         <label for="confirm_password"> Confirm Password</label>
+         <label for="confirm_password"><?php echo $lang["Confirm Password"];?> </label>
          <input type="password" onkeyup="validatePassword();" class="form-control my-2" id="confirm_password" name="confirm_password" placeholder="">
          <span id="password-confirmation"></span> 
 
         </div>
-       <button  type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn">Update Profile</button>
+       <button  type="submit" name="submit" id="submit" class="btn btn-success my-2 login-submit-btn"><?php echo $lang["Update Profile"];?></button>
     <br><br>
      </form>
 
@@ -81,16 +100,16 @@ $sql = "SELECT * from users WHERE USERNAME='$username' OR EMAIL='$username'";
     <script type="text/javascript">
 function enableBtn(ele,acceptor)
 {
-  if(acceptor.innerHTML=="Edit")
+  if(acceptor.innerHTML=="<?php echo $lang["Edit"]; ?>")
 {  var element=document.getElementById(ele);
   element.readOnly=false;
-  acceptor.innerHTML="Close";
+  acceptor.innerHTML="<?php echo $lang["Close"]; ?>";
 }
-else if(acceptor.innerHTML=="Close")
+else if(acceptor.innerHTML=="<?php echo $lang["Close"]; ?>")
 {
   var element=document.getElementById(ele);
   element.readOnly=true;
-  acceptor.innerHTML="Edit";
+  acceptor.innerHTML="<?php echo $lang["Edit"]; ?>";
 }
 }
 
@@ -101,16 +120,16 @@ function validatePassword()
   var conf_password=document.getElementById('confirm_password');
   if(new_pass.value== "" || conf_password.value=="")
   {
-    response.innerHTML="New and confirm password are not matching";
+    response.innerHTML="<?php echo $lang["New and confirm password are not matching"];?>";
     response.style.color="Red";
   }
   else if(new_pass.value===conf_password.value)
   {
-    response.innerHTML="Passwords matched";
+    response.innerHTML="<?php echo $lang["Passwords matched"];?>";
     response.style.color="Green";
   }
   else
-  {response.innerHTML="New and confirm password are not matching";
+  {response.innerHTML="<?php echo $lang["New and confirm password are not matching"];?>";
     response.style.color="Red";
     
   }
@@ -227,14 +246,14 @@ function enable(flag_email,flag_username)
 }
 
 function AlertIt(link) {
-var answer = confirm ("Are you sure want to delete this User? ")
+var answer = confirm ("<?php echo $lang["Are you sure want to delete this User?"];?>")
 if (answer)
 link=link.replace("delete","delete=");
 
 window.location=link;
 }
 function AlertItReset(link) {
-var answer = confirm ("Are you sure want to reset this User? ")
+var answer = confirm ("<?php echo $lang["Are you sure want to reset this User?"];?>")
 if (answer)
 link=link.replace("reset","reset=");
 
