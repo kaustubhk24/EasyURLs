@@ -22,7 +22,7 @@ if(!isset($_COOKIE["lang"])) {
 require_once('../config.php');
 if(isset($_GET['lang']))
 {
-    require_once ('assets/local/'.$_COOKIE["lang"].'.php');
+    //require_once ('assets/local/'.$_COOKIE["lang"].'.php');
     header('Location: ' . basename(__FILE__));
     setcookie("lang", $_GET['lang'], time() + (86400 * 30));
 }
