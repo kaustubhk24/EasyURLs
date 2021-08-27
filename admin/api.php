@@ -72,7 +72,7 @@ $sql = "SELECT * from api";
     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#new" type="button" role="tab" aria-controls="profile" aria-selected="false"><?php echo $lang["Add New Key"];?></button>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link" id="profile-tab" href="https://www.kaustubh.codes/blog/how-to-use-easyurls/#api-guide" target="_blank"><?php echo $lang["API Guide"];?></a>
+    <a class="nav-link" id="profile-tab" href="https://kaustubhk24.netlify.app/blog/how-to-use-easyurls/#api-guide" target="_blank"><?php echo $lang["API Guide"];?></a>
   </li>
   <iframe id="txtArea1" style="display:none"></iframe>
 
