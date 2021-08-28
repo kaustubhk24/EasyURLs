@@ -31,6 +31,10 @@ if(file_exists('install.php'))
 {
  unlink('install.php');
 }
+if(file_exists('API/installation2.php'))
+{
+ unlink('API/installation2.php');
+}
 if(file_exists('install2.php'))
 {
   unlink('install2.php');
