@@ -27,6 +27,7 @@ if(!isset($_COOKIE["lang"])) {
     }
   }
 
+  
 if(file_exists('install.php'))
 {
  unlink('install.php');
